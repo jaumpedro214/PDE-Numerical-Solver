@@ -18,11 +18,8 @@ for i = 1:1:ts;
   
   surf(x,y,sol)
   zlim([ zmin zmax ])
-  title("","interpreter", "tex");
+  title("Equation Solution");
   
-  if( mod(i,10) == 0 )
-    %print( ["plot_" int2str(i)], "-dpng" );
-  endif
   pause(0.01)
   
  endfor

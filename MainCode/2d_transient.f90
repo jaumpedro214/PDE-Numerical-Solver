@@ -1,5 +1,4 @@
 program upwind2d
-	use linear_system_mod
 	implicit none
 
 	! ============================================================================================== !
@@ -12,6 +11,7 @@ program upwind2d
 	integer output_mash, output_solution, plot_info
 
 	!Mesh info
+	integer nodes;
 	integer nodes_x, nodes_y
 	integer time_steps
 
@@ -68,24 +68,28 @@ program upwind2d
 	open(unit = output_solution, file = "output_solution.out" )
 	open(unit = plot_info, file = "plot_info.out" )
 
+	!Changeable variables ====================================================!
 	intr_x = 1.0000
 	intr_y = 1.0000
-	nodes_x = 50
-	nodes_y = nodes_x
-	delta_x = intr_x/(nodes_x-1)
-	delta_y = intr_y/(nodes_y-1)
 	
+	nodes_x = 50
+
 	neuman_on_y = .true.
 	
 	k1 = 1.000
 	k2 = 0.000
 	k3 = 1.000
 	vx = 0.000
-	vy = 0.000
+	vy = -5.000
 	sig = 0.000
 	
 	time_steps = 300
 	delta_t = 0.20*delta_x**2/max( k1 , max(k2,k3) )
+	!========================================================================!
+
+	nodes_y = nodes_x
+	delta_x = intr_x/(nodes_x-1)
+	delta_y = intr_y/(nodes_y-1)
 	
 	A = -2*k1/delta_x**2 - 2*k3/delta_y**2 + vx/delta_x + vy/delta_y + sig
 	B = k1/delta_x**2 - vx/delta_x
@@ -209,7 +213,7 @@ program upwind2d
 
 		initial_c = 0
 		if( y > 0.40 .and. y < 0.55 .and. x > 0.001 ) then
-			initial_c = 10
+			initial_c = 20
 		endif
 
 	end function initial_c
@@ -228,7 +232,7 @@ program upwind2d
 
 	real(8) function ul(xx)
 		real(8) xx
-		ul = real(-10,8)
+		ul = real(10,8)
 	end function ul
 
 	real(8) function uup(xx)
