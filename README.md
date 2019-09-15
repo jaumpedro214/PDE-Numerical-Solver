@@ -40,6 +40,16 @@ Numerical methods to solve PDE problems in space-time mesh.
  Contain important information about the mesh and time step that will be used to plot solutions.
  
  ### Plotting solution
-You will need Matlab or Octave to run the .m code. 
-     Once with Matlab/Octave opened, just run the code with execute button 
-     and watch the solutin change in time.
+You will need Matlab or Octave to run the .m code. Once with Matlab/Octave opened, just run the code with execute button and watch the solutin change in time.
+
+ ### Problems Variables/Conditions
+ We know that 
+ 
+ 
+ ![k](https://latex.codecogs.com/gif.latex?k%20%3D%20%5Cbegin%7Bbmatrix%7D%20k_%7B1%2C1%7D%20%26%20k_%7B1%2C2%7D%20%5C%5C%20k_%7B2%2C1%7D%20%26%20k_%7B2%2C2%7D%20%5Cend%7Bbmatrix%7D) 
+ 
+ 
+ in code, this constants are refered as k1, k2 and k3, where k2 is the sum of k21 and k22 
+ 
+ 
+ ![](https://latex.codecogs.com/gif.latex?%5C%20v%20%3D%20%5Cbegin%7Bbmatrix%7D%20v_x%20%26%20v_y%20%5Cend%7Bbmatrix%7D%20%5C%20%5Csigma%20%5Cin%20R)
