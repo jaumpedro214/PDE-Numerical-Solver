@@ -81,9 +81,9 @@ program upwind2d
 	!Here is where you change the parameters equations
 	
 	intr_x = 1.0000 ! x mesh size
-	intr_y = 1.0000 ! y mesh size
+	intr_y = 1.5000 ! y mesh size
 	
-	nodes_x = 50
+	nodes_x = 30
 
 	neuman_on_y = .true. !Neuman conditions apllied on y = 0 and y = intr_y
 	
@@ -91,11 +91,13 @@ program upwind2d
 	k2 = 0.000 ! k_{1,2} + k_{2,1}
 	k3 = 1.000 ! k_{2,2}
 	vx = 0.000 
-	vy = -5.000
+	vy = 0.000
 	sig = 0.000 !sigma 
 	
 	time_steps = 300
-	delta_t = 0.20*delta_x**2/max( k1 , max(k2,k3) )
+
+	delta_x = intr_x/(nodes_x-1)
+	delta_t = 0.20*delta_x**2/max( k1 , max(k2,k3) ) !Recommended value to delta_x <= delta_y
 
 	!============================================================================================!
 	!===================================== END SECTION 1 ========================================!
@@ -103,7 +105,6 @@ program upwind2d
 
 
 	nodes_y = nodes_x
-	delta_x = intr_x/(nodes_x-1)
 	delta_y = intr_y/(nodes_y-1)
 	
 	A = -2*k1/delta_x**2 - 2*k3/delta_y**2 + vx/delta_x + vy/delta_y + sig
@@ -222,19 +223,15 @@ program upwind2d
 
 	end function in_mash
 
+	!======================================= SECTION 2 ==========================================!
+	
 	!Initial problem condition
 	real(8) function initial_c(x,y)
 		real(8) x, y
 
 		initial_c = 0
-		if( y > 0.40 .and. y < 0.55 .and. x > 0.001 ) then
-			initial_c = 20
-		endif
 
 	end function initial_c
-
-
-	!======================================= SECTION 2 ==========================================!
 
 	!Flux function
 	real(8) function flux(x,y)
@@ -252,7 +249,7 @@ program upwind2d
 	!UL (U Left) is the value of u(0,x)
 	real(8) function ul(xx)
 		real(8) xx
-		ul = real(10,8)
+		ul = real(-10,8)
 	end function ul
 
 	!Uup (U Left) is the value of u(x,Ly) or ux(x,Ly)
