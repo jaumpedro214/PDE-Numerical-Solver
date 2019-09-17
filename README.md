@@ -40,7 +40,7 @@ Numerical methods to solve PDE problems in space-time mesh.
  Contain important information about the mesh and time step that will be used to plot solutions.
  
  ### Plotting solution
-You will need Matlab or Octave to run the .m code. Once with Matlab/Octave opened, just run the code with execute button and watch the solutin change in time.
+You will need Matlab or Octave to run the .m code. Once with Matlab/Octave opened, just run the code with execute button and watch the solution change in time.
 
  ### Problems Variables/Conditions
  We know that 
@@ -53,3 +53,12 @@ You will need Matlab or Octave to run the .m code. Once with Matlab/Octave opene
  
  
  ![](https://latex.codecogs.com/gif.latex?%5C%20v%20%3D%20%5Cbegin%7Bbmatrix%7D%20v_x%20%26%20v_y%20%5Cend%7Bbmatrix%7D%20%5C%20%5Csigma%20%5Cin%20R)
+ 
+ ### Solution examples
+
+Heat diffusion with constant temperature in borders
+![example_1](https://github.com/jaumpedro214/PDE-Numerical-Solver/blob/master/Docs/simulation_2.gif?raw=true)
+
+Diffusion-Convection example with constant Dirichilet and Neuman conditions.
+In this case, we can see the velocity effect pushing values towards x-axis.
+![example_2](https://raw.githubusercontent.com/jaumpedro214/PDE-Numerical-Solver/master/Docs/simulation_3.gif)
