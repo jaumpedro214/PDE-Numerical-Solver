@@ -7,6 +7,14 @@ program upwind2d
 	!							joaopedrodasivalima@gmail.com										 !
 	! ============================================================================================== !
 
+
+
+	! ============================================================================================== !
+	!  						Changing Problem's Parameters/Conditions                                 !
+	!		Section 1: Nodes nuber, spatial mesh, equation parameters, time step, time step size     !
+	!		Section 2: Border conditons, initial condition, flux function							 !
+	! ============================================================================================== !
+
 	!Archives ID
 	integer output_mash, output_solution, plot_info
 
@@ -68,14 +76,16 @@ program upwind2d
 	open(unit = output_solution, file = "output_solution.out" )
 	open(unit = plot_info, file = "plot_info.out" )
 
+	!======================================= SECTION 1 ==========================================!
+	
 	!Here is where you change the parameters equations
-	!Equation Parameters =====================================================!
-	intr_x = 1.0000
-	intr_y = 1.0000
+	
+	intr_x = 1.0000 ! x mesh size
+	intr_y = 1.0000 ! y mesh size
 	
 	nodes_x = 50
 
-	neuman_on_y = .true.
+	neuman_on_y = .true. !Neuman conditions apllied on y = 0 and y = intr_y
 	
 	k1 = 1.000 ! k_{1,1}
 	k2 = 0.000 ! k_{1,2} + k_{2,1}
@@ -86,7 +96,11 @@ program upwind2d
 	
 	time_steps = 300
 	delta_t = 0.20*delta_x**2/max( k1 , max(k2,k3) )
-	!========================================================================!
+
+	!============================================================================================!
+	!===================================== END SECTION 1 ========================================!
+
+
 
 	nodes_y = nodes_x
 	delta_x = intr_x/(nodes_x-1)
@@ -219,6 +233,9 @@ program upwind2d
 
 	end function initial_c
 
+
+	!======================================= SECTION 2 ==========================================!
+
 	!Flux function
 	real(8) function flux(x,y)
 		real(8) x, y
@@ -249,6 +266,10 @@ program upwind2d
 		real(8) xx
 		udn = 0
 	end function udn
+
+	!===================================== END SECTION 2 ========================================!
+	!============================================================================================!
+
 
 	!Coefficients according each direction
 	real(8) function coefficient( d1, d2 )
